@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Guia de estudo TCE-GO</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#eef2ef;--card:#fff;--ink:#14213d;--mut:#5b6678;--line:#d5ddd8;--hi:#f2c94c;--ok:#1f7a5a;--bad:#c0392b;--warn:#b9770e;--bar:#dfe7e2;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#101820;--card:#18232f;--ink:#e8edf3;--mut:#9aa7b8;--line:#2a3846;--hi:#f2c94c;--ok:#4cc79a;--bad:#ff7b6b;--warn:#f0b24a;--bar:#2a3846}}
+:root[data-theme="dark"]{--bg:#101820;--card:#18232f;--ink:#e8edf3;--mut:#9aa7b8;--line:#2a3846;--ok:#4cc79a;--bad:#ff7b6b;--warn:#f0b24a;--bar:#2a3846}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 "Bricolage Grotesque",system-ui,-apple-system,"Segoe UI",sans-serif;max-width:720px;margin-inline:auto;padding:0 14px 40px}
+header{padding:18px 0 8px}
+h1{font-size:26px;font-weight:800;margin:0;letter-spacing:-.02em}
+h1 span{background:linear-gradient(transparent 55%,var(--hi) 55%)}
+.sub{color:var(--mut);margin:4px 0 0;font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:14px 0}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px}
+.stat b{display:block;font-size:22px;font-weight:800}
+.stat small{color:var(--mut);font-size:12px}
+nav{display:flex;gap:6px;position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);padding:8px 0;z-index:5}
+nav button{flex:1;padding:10px 4px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;font:inherit;font-weight:600;cursor:pointer}
+nav button[aria-selected="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid var(--hi);outline-offset:2px}
+.group{margin:18px 0 6px;font-size:14px;color:var(--mut);font-weight:600}
+details{background:var(--card);border:1px solid var(--line);border-radius:10px;margin:8px 0}
+summary{list-style:none;cursor:pointer;padding:12px;display:grid;grid-template-columns:1fr auto;gap:6px 10px;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary .n{font-weight:600}
+summary .p{font-size:13px;color:var(--mut)}
+.track{grid-column:1/-1;height:6px;background:var(--bar);border-radius:3px;overflow:hidden}
+.track i{display:block;height:100%;background:var(--ok)}
+.tags{font-size:12px;color:var(--mut)}
+ul.t{list-style:none;margin:0;padding:0 12px 10px}
+ul.t li{border-top:1px solid var(--line)}
+ul.t label{display:flex;gap:10px;padding:10px 0;cursor:pointer;align-items:flex-start}
+ul.t input{width:20px;height:20px;margin:1px 0 0;accent-color:var(--ok);flex:none}
+ul.t input:checked+span{color:var(--mut);text-decoration:line-through}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px;margin:8px 0}
+.panel label{display:block;font-size:14px;color:var(--mut);margin:10px 0 4px}
+select,input[type=number]{width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:inherit}
+.row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.go{margin-top:14px;width:100%;padding:12px;border:0;border-radius:8px;background:var(--hi);color:#14213d;font:inherit;font-weight:800;cursor:pointer}
+.msg{font-size:14px;color:var(--ok);min-height:20px;margin-top:8px}
+.log{display:flex;justify-content:space-between;gap:8px;padding:10px 0;border-top:1px solid var(--line);font-size:14px}
+.log button{border:0;background:none;color:var(--bad);font:inherit;cursor:pointer}
+.rk{display:grid;grid-template-columns:34px 1fr auto;gap:10px;align-items:center;padding:12px 0;border-top:1px solid var(--line)}
+.pos{font-weight:800;font-size:20px;color:var(--mut)}
+.rk .n{font-weight:600}
+.rk small{color:var(--mut);display:block}
+.pct{font-weight:800;font-size:20px;text-align:right}
+.pct small{font-size:12px;font-weight:600}
+.dom{color:var(--ok)}.boa{color:var(--warn)}.atn{color:var(--bad)}.sd{color:var(--mut)}
+.reset{margin-top:24px;background:none;border:1px solid var(--line);color:var(--mut);border-radius:8px;padding:8px 12px;font:inherit;cursor:pointer}
+input[type=text]{width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:inherit}
+.au small{display:block}
+.srch{position:relative;margin:6px 0 4px}
+.srch svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:18px;height:18px;stroke:var(--mut)}
+.srch input{width:100%;padding:10px 12px 10px 38px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);font:inherit}
+.hide{display:none}
+</style>
+</head>
+<body>
+<header>
+<h1><span>Guia TCE-GO</span></h1>
+<p class="sub">Banca FCC · Prova em 17/01/2027 · Específicas valem o dobro</p>
+</header>
+<div class="stats">
+<div class="stat"><b id="sDias">–</b><small>dias para a prova</small></div>
+<div class="stat"><b id="sCob">0%</b><small>conteúdo estudado</small></div>
+<div class="stat"><b id="sAc">–</b><small>acerto geral</small></div>
+</div>
+<nav role="tablist">
+<button role="tab" data-v="guia" aria-selected="true">Guia</button>
+<button role="tab" data-v="reg" aria-selected="false">Registrar</button>
+<button role="tab" data-v="rank" aria-selected="false">Ranking</button>
+<button role="tab" data-v="aulas" aria-selected="false">Aulas</button>
+</nav>
+<main>
+<div id="busca" class="srch"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input id="q" type="search" placeholder="Pesquisar conteúdo" aria-label="Pesquisar conteúdo"></div>
+<section id="v-guia"></section>
+<section id="v-reg" class="hide">
+<div class="panel">
+<label for="fM">Matéria</label><select id="fM"></select>
+<div class="row">
+<div><label for="fT">Minutos</label><input id="fT" type="number" min="0" inputmode="numeric" placeholder="0"></div>
+<div><label for="fQ">Questões</label><input id="fQ" type="number" min="0" inputmode="numeric" placeholder="0"></div>
+<div><label for="fA">Acertos</label><input id="fA" type="number" min="0" inputmode="numeric" placeholder="0"></div>
+</div>
+<button class="go" id="fS">Salvar registro</button>
+<div class="msg" id="fMsg" role="status"></div>
+</div>
+<div class="panel"><b>Últimos registros</b><div id="logs"></div></div>
+</section>
+<section id="v-rank" class="hide"></section>
+<section id="v-aulas" class="hide"></section>
+</main>
+<button class="reset" id="rst">Apagar todos os dados</button>
+<script>
+const W=2;
+const S=[
+["da","Direito Administrativo",W,"Princípios|Administração direta e indireta|Agentes públicos|Regime jurídico: provimento, vacância, direitos e deveres|Poderes administrativos|Poder regulamentar e de polícia; abuso de poder|Atos administrativos: conceito e requisitos|Classificação e espécies de atos|Extinção dos atos|Convalidação e prescrição|Responsabilidade civil do Estado|Excludentes e ação regressiva|Controle da Administração|Controle judicial e pelos Tribunais de Contas|Improbidade: atos e sujeitos|Improbidade: sanções e procedimento|Processo administrativo|Prazos e recursos|Serviços públicos|Bens públicos"],
+["afo","AFO",W,"Orçamento público: conceitos e tipos|Princípios orçamentários|PPA e LDO|LOA e vedações|Ciclo orçamentário|Créditos adicionais|Receita pública|Estágios da receita|Despesa pública: classificação|Empenho, liquidação e pagamento|Restos a pagar|Despesas de exercícios anteriores|LRF: planejamento e transparência|LRF: receita e renúncia|LRF: despesa com pessoal|LRF: RREO, RGF e dívida|Lei 4.320/1964"],
+["lic","Licitações (Lei 14.133)",W,"Âmbito, princípios e definições|Agentes, pregoeiro e fases|Modalidades|Diálogo competitivo e julgamento|Fase preparatória: ETP e TR|Orçamento, edital e publicidade|Dispensa (art. 75)|Inexigibilidade (art. 74)|Procedimentos auxiliares|Registro de preços|Contratos: cláusulas|Garantias e duração|Alteração dos contratos|Execução e fiscalização|Extinção dos contratos|Infrações e sanções|Crimes em licitações|Controle e linhas de defesa"],
+["casp","CASP",W,"Conceitos e campo de aplicação|Regimes contábeis e PCASP|Patrimônio público: ativo|Passivo e patrimônio líquido|Variações patrimoniais aumentativas|Variações patrimoniais diminutivas|Receita (enfoque patrimonial)|Despesa (enfoque patrimonial)|Lançamentos típicos: receita|Lançamentos típicos: despesa|DCASP: visão geral|Balanço Orçamentário|Balanço Financeiro|Balanço Patrimonial|DVP|DFC|NBC TSP: estrutura conceitual|NBC TSP: imobilizado e depreciação"],
+["ce","Controle Externo",W,"Conceito e tipos de controle|Competências dos Tribunais de Contas|CF arts. 70 a 75|TCE na Constituição de Goiás|Lei Orgânica: jurisdição|Prestação e julgamento de contas|Fiscalizações: auditoria e inspeção|Sanções e recursos|Regimento Interno do TCE-GO"],
+["ap","Administração Pública",W,"Modelos: patrimonialista, burocrático e gerencial|Estruturas organizacionais|Processo organizacional|Princípios da Administração Pública|Qualidade no serviço público|Governança pública|Transparência e accountability|Indicadores de gestão|Avaliação de desempenho e competências"],
+["dc","Direito Constitucional",W,"Princípios fundamentais (arts. 1º a 4º)|Direitos e garantias (art. 5º)|Remédios constitucionais|Direitos sociais, nacionalidade e políticos|Organização do Estado|Administração Pública (arts. 37 a 41)|Poder Legislativo e fiscalização|Poder Executivo|Poder Judiciário e funções essenciais"],
+["li","Legislação Institucional",W,"Lei Orgânica: natureza e competências|Jurisdição e jurisdicionados|Julgamento de contas|Fiscalização|Sanções|Recursos|Regimento: organização (Pleno e Câmaras)|Regimento: processos|Regimento: demais pontos do edital|Lei seca: releitura completa"],
+["ag","Administração Geral",W,"Teorias da administração|Planejamento|Organização|Direção e liderança|Controle|Gestão de processos|Gestão de projetos|Comunicação e tomada de decisão"],
+["gp","Gestão de Pessoas e Comport. Org.",W,"Recrutamento e seleção|Motivação|Treinamento e desenvolvimento|Liderança|Avaliação de desempenho|Cultura e clima organizacional|Gestão por competências|Grupos e equipes|Remuneração e benefícios|Conflitos e negociação|Qualidade de vida no trabalho|Comunicação organizacional"],
+["ae","Administração Estratégica",W,"Missão, visão e valores|Análise SWOT|Ciclo do planejamento estratégico|Balanced Scorecard|Cenários e indicadores|Gestão de resultados"],
+["pt","Português",1,"Compreensão de textos|Interpretação e inferência|Tipologia textual|Coesão e coerência|Classes de palavras|Pronome, conjunção e preposição|Concordância verbal|Concordância nominal|Regência verbal e nominal|Crase|Pontuação: vírgula|Pontuação: demais sinais|Colocação pronominal|Pronomes relativos|Tempos e modos verbais|Vozes verbais|Período composto|Reescrita de frases|Semântica e ortografia"],
+["mt","Matemática e Raciocínio Lógico",1,"Porcentagem e frações|Operações|Razão, proporção e regra de três|Equações e problemas|Sequências lógicas|Lógica proposicional|Equivalências e negações|Argumentação lógica|Conjuntos e diagramas|Contagem e probabilidade|Problemas estilo FCC"],
+["rd","Redação",1,"Estrutura dissertativo-argumentativa|Banco de conectivos|Tomada de contas|Transparência e controle social|Ética no serviço público|Inteligência artificial no trabalho|Desinformação nas redes|Mobilidade urbana|Sustentabilidade nas cidades|Papel dos Tribunais de Contas|Acesso à saúde pública|Educação e desigualdade|Privacidade e segurança digital|Envelhecimento da população|Combate à corrupção"]
+].map(([id,nome,peso,t])=>({id,nome,peso,t:t.split("|")}));
+const KEY="guia-tce-go-v1";
+let st={done:{},logs:[]};
+try{const r=localStorage.getItem(KEY);if(r)st=Object.assign(st,JSON.parse(r))}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}};
+const AU0=[["Direito Constitucional","Semana 1 · 07/10"],["Legislação Institucional","Semana 1 · 07/10"],["Todas as matérias","Semana 2 · 14/10"],["Gestão de Pessoas","Semana 2 · 17/10"],["Direito Constitucional: aula 2 (Evaldo)","Semana 3 · 21/10"],["Direito e Legislação Institucional","Semana 3 · 21/10"],["Lei Orgânica: julgamento de contas","Semana 3 · 21/10"],["Direito Administrativo, AFO e Português","Semana 3 · 22/10"],["Licitações, CASP, Adm. Geral e Português","Semana 3 · 23/10"],["Redação","Semana 3 · 24/10"],["Live Jurídica (YouTube, Estratégia Carreira Jurídica)","Semana 3 · 28/10"],["TCE na Constituição de Goiás","Semana 4 · 28/10"],["Direito Constitucional: nacionalidade e direitos políticos (2 últimos tópicos)","Semana 4 · 28/10"],["AFO: LRF receita, renúncia e despesa (aula 2, canal Luciana Marinho)","Semana 7 · 19/11"]];
+function seed(){st.aulas=AU0.map((a,i)=>({i:i+1,n:a[0],w:a[1],d:0}))}
+if(!st.aulas){seed();save()}
+if(!st.pre){const PRE={da:[0,1,2,3,4,6,7,8,9,10,12],afo:[0,1,2,3,4,6,7,8,9,10,12],lic:[0,1,2,3,4,6,7,8,10,11,12],casp:[0,1,2,3,4,6,7,9,10,11,12],ce:[0,1,4,5,6],ap:[0,2,4,5,6],dc:[4,5,6],li:[4,5],ag:[0,1,3,4,5],gp:[0,1],ae:[0,1,2],pt:[0,1,2,3,4,6,7,8,10,12],mt:[0,1,2,3,6],rd:[0,1]};for(const id in PRE)PRE[id].forEach(i=>{st.done[id+i]=1});st.pre=1;save()}
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function agg(id){const l=st.logs.filter(x=>x.s===id);return{min:l.reduce((a,x)=>a+x.m,0),q:l.reduce((a,x)=>a+x.q,0),a:l.reduce((a,x)=>a+x.a,0)}}
+function cov(s){const d=s.t.filter((_,i)=>st.done[s.id+i]).length;return{d,n:s.t.length,p:Math.round(100*d/s.t.length)}}
+function fmt(m){return m>=60?Math.floor(m/60)+"h"+(m%60?String(m%60).padStart(2,"0"):""):m+"min"}
+let Q="";const norm=s=>s.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
+function renderGuia(){
+const open=[...document.querySelectorAll("#v-guia details[open]")].map(d=>d.dataset.id);
+let h="";
+[["Específicas (peso 2)",W],["Básicas (peso 1)",1]].forEach(([tt,w])=>{
+h+=`<div class="group">${tt}</div>`;
+S.filter(s=>s.peso===w).forEach(s=>{const c=cov(s);const nm=norm(s.nome).includes(Q);if(Q&&!nm&&!s.t.some(t=>norm(t).includes(Q)))return;
+h+=`<details data-id="${s.id}"${open.includes(s.id)||Q?" open":""}><summary><span class="n">${esc(s.nome)}</span><span class="p">${c.d}/${c.n}</span><span class="track"><i style="width:${c.p}%"></i></span></summary><ul class="t">`;
+s.t.forEach((t,i)=>{if(Q&&!nm&&!norm(t).includes(Q))return;h+=`<li><label><input type="checkbox" data-k="${s.id}${i}"${st.done[s.id+i]?" checked":""}><span>${esc(t)}</span></label></li>`});
+h+="</ul></details>"})});
+$("v-guia").innerHTML=h.includes("<details")?h:'<p class="sub">Nenhum tópico encontrado.</p>'}
+function renderLogs(){
+const l=[...st.logs].reverse().slice(0,15);
+$("logs").innerHTML=l.length?l.map(x=>{const s=S.find(y=>y.id===x.s);return `<div class="log"><span><b>${esc(s.nome)}</b><br>${x.d} · ${fmt(x.m)} · ${x.a}/${x.q} acertos</span><button data-del="${x.i}" aria-label="Apagar registro">Apagar</button></div>`}).join(""):'<p class="sub">Nenhum registro ainda. Salve sua primeira sessão acima.</p>'}
+function ranking(){
+return S.map(s=>{const g=agg(s.id),c=cov(s);return{s,g,c,ac:g.q?Math.round(100*g.a/g.q):null}})}
+function renderRank(){
+const r=ranking();
+const com=r.filter(x=>x.ac!==null).sort((a,b)=>b.ac-a.ac||b.g.q-a.g.q);
+const sem=r.filter(x=>x.ac===null);
+const cls=a=>a===null?["sd","Sem dados"]:a>=80?["dom","Dominada"]:a>=60?["boa","Boa"]:["atn","Precisa de atenção"];
+let h='<div class="panel"><b>Ranking por taxa de acerto</b><p class="sub">Registre questões na aba Registrar para ver as matérias ordenadas. Matérias com acerto abaixo de 60% pedem reforço.</p>';
+[...com,...sem].forEach((x,i)=>{const [c,l]=cls(x.ac);
+h+=`<div class="rk"><span class="pos">${x.ac===null?"–":i+1}</span><span class="n">${esc(x.s.nome)}<small class="${c}">${l} · ${x.g.a}/${x.g.q} questões · ${fmt(x.g.min)} · ${x.c.p}% do guia${x.s.peso===W?" · peso 2":""}</small></span><span class="pct ${c}">${x.ac===null?"":x.ac+"<small>%</small>"}</span><span class="track" role="img" aria-label="${x.c.p}% do conteúdo estudado"><i style="width:${x.c.p}%"></i></span></div>`});
+$("v-rank").innerHTML=h+"</div>"}
+function stats(){
+const dias=Math.ceil((new Date(2027,0,17)-new Date(new Date().toDateString()))/864e5);
+$("sDias").textContent=dias>0?dias:(dias===0?"Hoje":"–");
+let d=0,n=0;S.forEach(s=>{const c=cov(s);d+=c.d;n+=c.n});
+$("sCob").textContent=Math.round(100*d/n)+"%";
+const q=st.logs.reduce((a,x)=>a+x.q,0),a=st.logs.reduce((s,x)=>s+x.a,0);
+$("sAc").textContent=q?Math.round(100*a/q)+"%":"–"}
+function all(){renderGuia();renderLogs();renderRank();renderAulas();stats()}
+$("fM").innerHTML=S.map(s=>`<option value="${s.id}">${esc(s.nome)}</option>`).join("");
+$("v-guia").addEventListener("change",e=>{const k=e.target.dataset.k;if(!k)return;if(e.target.checked)st.done[k]=1;else delete st.done[k];save();
+const id=k.replace(/\d+$/,"");const s=S.find(x=>x.id===id),c=cov(s),d=e.target.closest("details");
+d.querySelector(".p").textContent=c.d+"/"+c.n;d.querySelector(".track i").style.width=c.p+"%";renderRank();stats()});
+$("fS").onclick=()=>{
+const m=+$("fT").value||0,q=+$("fQ").value||0,a=+$("fA").value||0;
+const msg=$("fMsg");msg.style.color="var(--bad)";
+if(!m&&!q){msg.textContent="Informe os minutos ou as questões.";return}
+if(a>q){msg.textContent="Os acertos não podem passar do total de questões.";return}
+st.logs.push({i:Date.now(),s:$("fM").value,m,q,a,d:new Date().toLocaleDateString("pt-BR")});save();
+$("fT").value=$("fQ").value=$("fA").value="";msg.style.color="var(--ok)";msg.textContent="Registro salvo.";renderLogs();renderRank();stats()};
+$("logs").addEventListener("click",e=>{const i=e.target.dataset.del;if(!i)return;st.logs=st.logs.filter(x=>String(x.i)!==i);save();renderLogs();renderRank();stats()});
+$("rst").onclick=()=>{if(confirm("Apagar checklist e registros deste aparelho?")){st={done:{},logs:[],pre:1};seed();save();all()}};
+document.querySelectorAll("nav button").forEach(b=>b.onclick=()=>{
+document.querySelectorAll("nav button").forEach(x=>x.setAttribute("aria-selected",x===b));
+["guia","reg","rank","aulas"].forEach(v=>$("v-"+v).classList.toggle("hide",v!==b.dataset.v));
+$("busca").classList.toggle("hide",b.dataset.v!=="guia");
+if(b.dataset.v==="rank")renderRank()});
+function renderAulas(){
+const p=st.aulas.filter(x=>!x.d),f=st.aulas.filter(x=>x.d);
+const li=x=>`<li><label class="au"><input type="checkbox" data-au="${x.i}"${x.d?" checked":""}><span>${esc(x.n)}<small class="sub">${esc(x.w)}</small></span></label></li>`;
+$("v-aulas").innerHTML=`<div class="panel"><b>Falta assistir (${p.length})</b><ul class="t" style="padding:0">${p.map(li).join("")||'<p class="sub">Tudo em dia.</p>'}</ul></div><div class="panel"><label for="aN">Adicionar aula</label><input id="aN" type="text" placeholder="Matéria e tema"><button class="go" id="aAdd">Adicionar à lista</button></div>${f.length?`<div class="panel"><b>Já assistidas (${f.length})</b><ul class="t" style="padding:0">${f.map(li).join("")}</ul></div>`:""}`}
+$("v-aulas").addEventListener("change",e=>{const i=e.target.dataset.au;if(!i)return;const a=st.aulas.find(x=>String(x.i)===i);a.d=e.target.checked?1:0;save();renderAulas()});
+$("v-aulas").addEventListener("click",e=>{if(e.target.id!=="aAdd")return;const v=$("aN").value.trim();if(!v)return;st.aulas.push({i:Date.now(),n:v,w:"Adicionada por você",d:0});save();renderAulas()});
+$("q").addEventListener("input",e=>{Q=norm(e.target.value.trim());renderGuia()});
+all();
+</script>
+</body>
+</html>
